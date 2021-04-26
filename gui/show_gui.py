@@ -1,10 +1,10 @@
 from math import sqrt
 from tkinter import *
 
-from color_conversions import invert_hex
+from operations.color_conversions import invert_hex
 
 
-def gui(colors) -> None:
+def show_gui(colors) -> None:
     window = Tk()
     window.title("Chromata")
     row = 0

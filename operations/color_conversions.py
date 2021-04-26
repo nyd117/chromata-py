@@ -1,5 +1,5 @@
 from typing import Tuple
-from extraction import is_valid_hex_color
+from operations.extraction import is_valid_hex_color
 
 
 def hex_to_rgb(color: str) -> Tuple[int, int, int]:

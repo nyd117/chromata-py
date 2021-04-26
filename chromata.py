@@ -1,5 +1,5 @@
-from argument_parsing import *
-from handlers import handle_input
+from operations.argument_parsing import *
+from handlers.input_handler import handle_input
 
 
 def main():

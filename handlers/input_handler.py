@@ -1,9 +1,9 @@
 import argparse
-import extraction
-from color_conversions import hex_to_rgb
-from gui import gui
-from system_utils import is_path_exists_or_creatable
-from utils import trim
+from operations import extraction
+from operations.color_conversions import hex_to_rgb
+from gui.show_gui import show_gui
+from utils.system_utils import is_path_exists_or_creatable
+from utils.utils import trim
 
 
 def handle_input(parser: argparse.ArgumentParser) -> None:
@@ -31,7 +31,7 @@ def handle_input(parser: argparse.ArgumentParser) -> None:
 
     def assert_gui(col):
         if gui_enabled:
-            gui(col)
+            show_gui(col)
 
     execute_arg(args.a, lambda arg: print(hex_to_rgb(arg)))
     execute_arg(args.e, lambda arg: extract_input(arg))
