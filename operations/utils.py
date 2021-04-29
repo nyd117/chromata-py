@@ -1,6 +1,36 @@
 import errno
+import logging
 import os
 import sys
+
+
+def trim(collection: list) -> list:
+    """Does not preserve sorting"""
+    return list(set(collection))
+
+
+def save_file(data, export_file):
+    create_dir(os.path.dirname(export_file))
+
+    try:
+        with open(export_file, "w") as file:
+            file.write(data)
+    except PermissionError:
+        logging.warning("Couldn't write to %s.", export_file)
+
+
+def create_dir(directory):
+    os.makedirs(directory, exist_ok=True)
+
+
+def read_file_raw(input_file):
+    with open(input_file, "r") as file:
+        return file.readlines()
+
+
+def wrap_integer(value: int, min_value: int, max_value: int):
+    return (value - min_value) % (max_value - min_value + 1) + min_value
+
 
 ERROR_INVALID_NAME = 123
 
@@ -98,6 +128,25 @@ def is_path_exists_or_creatable(pathname: str) -> bool:
         # invalid pathnames, is_pathname_valid() is explicitly called first.
         return is_pathname_valid(pathname) and (
             os.path.exists(pathname) or is_path_creatable(pathname))
+    # Report failure on non-fatal filesystem complaints (e.g., connection
+    # timeouts, permissions issues) implying this path to be inaccessible. All
+    # other exceptions are unrelated fatal issues and should not be caught here.
+    except OSError:
+        return False
+
+
+def is_path_exists(pathname: str) -> bool:
+    """
+    `True` if the passed pathname is a valid pathname for the current OS _and_
+    currently exists; `False` otherwise.
+
+    This function is guaranteed to _never_ raise exceptions.
+    """
+    try:
+        # To prevent "os" module calls from raising undesirable exceptions on
+        # invalid pathnames, is_pathname_valid() is explicitly called first.
+        return is_pathname_valid(pathname) and (
+            os.path.exists(pathname))
     # Report failure on non-fatal filesystem complaints (e.g., connection
     # timeouts, permissions issues) implying this path to be inaccessible. All
     # other exceptions are unrelated fatal issues and should not be caught here.

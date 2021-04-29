@@ -1,4 +1,4 @@
-from operations.argument_parsing import *
+from operations.argument_parsing import define_args
 from handlers.input_handler import handle_input
 
 
