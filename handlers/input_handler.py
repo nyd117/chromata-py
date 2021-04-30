@@ -21,10 +21,10 @@ def resolve_backend(b) -> Backend:
 
 def handle_input(parser: argparse.ArgumentParser) -> None:
     args = parser.parse_args()
-    gui_enabled: bool = args.ng is False
+    gui_enabled: bool = args.n is False
     backend: Backend = resolve_backend(args.b)
-    target_colors = args.cn or 8
-    target_template = args.tm or "all" if args.g else None
+    target_colors = args.c or 8
+    target_template = args.t or "all" if args.g else None
     execute_arg = (lambda arg, func: func(arg) if arg is not None else False)
 
     actions = {

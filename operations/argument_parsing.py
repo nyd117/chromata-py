@@ -31,16 +31,16 @@ def define_args() -> argparse.ArgumentParser:
     arg.add_argument("-b", choices=["colorThief", "colorz"],
                      help="Define backend.")
 
-    arg.add_argument("-cn", type=check_positive,
+    arg.add_argument("-c", type=check_positive,
                      help="Number of colors to be extracted from backend.")
 
     arg.add_argument("-g", action='store_true',
                      help="Generate templates.")
 
-    arg.add_argument("-tm", metavar="\"template name\"",
+    arg.add_argument("-t", metavar="\"template name\"",
                      help="Define which template.")
 
-    arg.add_argument("-ng", action='store_true'
+    arg.add_argument("-n", action='store_true'
                      , help="No GUI.")
 
     return arg
